@@ -1,0 +1,100 @@
+body {
+margin-top : 0px; 
+margin-right : 10px; 
+margin-bottom : 10px; 
+margin-left : 10px; 
+font-family: verdana, "Times New Roman", Times, serif;
+font-weight : normal; 
+color: black;
+font-size: 90%;
+background-color: white  }
+
+.content {
+position: relative;
+width: auto;
+min-width: 50em;
+max-width: 70em;
+margin: 0em 9em 1em 9em;
+border: 0px solid black;
+padding: 10px;
+z-index: 2;
+}
+
+#leftbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 2em;
+    left: 1em;
+    width: 8em }
+#leftbar li {
+    background: #FFCC66;
+    color: blue;
+    margin: 1px 0;
+    padding: 0.3em;
+    border-right: 15px solid  orange}
+#leftbar a {text-decoration: none}
+#leftbar a:link { color: blue; }
+#leftbar a:visited { color: blue; }
+#leftbar a:hover { 
+	font-weight: bold; 
+	color: gray;
+        font-size: 1em}
+
+#rightbar {
+    background-color: #4a4a4a ;
+    position: absolute;
+    padding: 0px;
+    margin: 0;
+    top: 24.0em;
+    /*right: 1em;*/
+    left: 1em;
+    width: 8em;
+    text-align: center;}
+#rightbar a {
+    color: blue;
+    font-family: verdana, arial, helvetica, sans-serif;
+    text-decoration: none;
+    margin: 0px;
+    font-size: 0.7em}
+#rightbar a:link { color: orange }
+#rightbar a:visited { color: #fc6}
+#rightbar a:hover { 
+	font-weight: normal; 
+	color: #ccc;
+        font-size: 0.7em}
+#rightbar h4 { 
+     color: orange;
+     bottom: 0em;}
+
+#rightbarimage {
+width: 10em;
+right: 0em;
+top: 0em;
+position: absolute;
+z-index: 0;
+}
+
+h1,h2,h3 {
+    font-family: verdana, Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif;
+    color: gray;
+    background-color: #FFCC66;
+    border-right: 15px solid  orange}
+
+a {text-decoration: none}
+
+a:link {
+    color: blue }
+a:visited {
+    color: blue}
+
+address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
+    
+.ptmb7t-x-x-120{font-size:150%; font-weight: bold;}
+
+
