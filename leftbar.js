@@ -3,7 +3,7 @@ document.write('<li><a href="index.html">Home</a>');
 document.write('<li><a href="bio.html">About Me</a>');
 document.write('<li><a href="research.html">Research</a>');
 document.write('<li><a href="courses.html">Teaching</a>');
-document.write('<li><a href="pubs-JourSubPub.html">Publications</a>');
+document.write('<li><a href="pubs-ConfSel.html">Publications</a>');
 document.write('<li>Links');
 
 /**********************/
