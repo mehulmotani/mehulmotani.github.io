@@ -48,6 +48,8 @@ document.write(' <a target="_blank" href="http://www.google.com/search?q=cambodi
 document.write(' <hr>');
 document.write(' <a target="_blank" href="http://news.google.com/">Google News</a>');
 document.write(' <a target="_blank" href="http://news.yahoo.com/">Yahoo News</a>');
+document.write(' <a target="_blank" href="https://fivethirtyeight.com/">538</a>');
+document.write(' <a target="_blank" href="https://www.realclearpolitics.com/">RCP</a>');
 document.write(' <a target="_blank" href="http://www.huffingtonpost.com/">Huff</a>');
 document.write(' <a target="_blank" href="http://crooksandliars.com/">Crooks-Liars</a>');
 document.write(' <a target="_blank" href="http://www.mediaite.com/">Mediaite</a>');
