@@ -27,7 +27,7 @@ z-index: 2;
     position: absolute;
     top: 2em;
     left: 1em;
-    width: 8em }
+    width: 10em }
 #leftbar li {
     background: #FFCC66;
     color: blue;
@@ -50,7 +50,7 @@ z-index: 2;
     top: 24.0em;
     /*right: 1em;*/
     left: 1em;
-    width: 8em;
+    width: 10em;
     text-align: center;}
 #rightbar a {
     color: blue;
