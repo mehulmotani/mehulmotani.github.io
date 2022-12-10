@@ -44,7 +44,7 @@ z-index: 2;
 
 #rightbar {
     background-color: #4a4a4a ;
-    position: absolute;
+    position: fixed;
     padding: 0px;
     margin: 0;
     top: 27.0em;
