@@ -16,7 +16,7 @@ min-width: 50em;
 max-width: 70em;
 margin: 0em 9em 1em 9em;
 border: 0px solid black;
-padding: 10px;
+padding: 50px;
 z-index: 2;
 }
 
@@ -24,7 +24,7 @@ z-index: 2;
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: absolute;
+    position: fixed;
     top: 2em;
     left: 1em;
     width: 10em }
@@ -47,7 +47,7 @@ z-index: 2;
     position: absolute;
     padding: 0px;
     margin: 0;
-    top: 50.0em;
+    top: 27.0em;
     /*right: 1em;*/
     left: 1em;
     width: 10em;
