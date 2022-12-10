@@ -1,0 +1,24 @@
+
+for x in `find . -name "*.html" -not -path "*MINIFIED*" -print`
+do
+    echo $x 
+    tr -d '\n' < $x > ./MINIFIED/$x
+done
+
+for x in `find . -name "*.css" -not -path "*MINIFIED*" -print`
+do
+    echo $x 
+    tr -d '\n' < $x > ./MINIFIED/$x
+done
+
+for x in `find . -name "*.js" -not -path "*MINIFIED*" -print`
+do
+    echo $x 
+    cp $x ./MINIFIED/$x
+done
+
+
+
+
+
+
