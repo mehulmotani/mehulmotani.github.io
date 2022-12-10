@@ -81,7 +81,7 @@ h1,h2,h3 {
           SunSans-Regular, sans-serif;
     color: gray;
     background-color: #FFCC66;
-    border-right: 15px solid  orange}
+    border-left: 15px solid  orange}
 
 a {text-decoration: none}
 
@@ -98,11 +98,10 @@ address {
 #.ptmb7t-x-x-120{font-size:150%; font-weight: bold;}
 
 .ptmb7t-x-x-120{
-    font-size:150%;
+    font-size:175%;
     font-weight: bold;
-    font-family: verdana, Helvetica, Geneva, Arial,
-          SunSans-Regular, sans-serif;
-    color: black;
+    color: gray;
     background-color: #FFCC66;
-    border-right: 15px solid  orange}
+    border-right:230px solid #FFCC66;
+    border-left: 15px solid orange}
 
