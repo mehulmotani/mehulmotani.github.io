@@ -1,0 +1,98 @@
+/*
+style for this shannon website
+*/
+
+::-moz-selection 	{ background-color: #91D8f7; color: #fff; }
+::selection 		{ background-color: #91D8f7; color: #fff; }
+
+a				{ outline: 0; color: #080; text-decoration: none; }
+a:hover 			{ text-decoration: underline; }
+p a:hover 			{ color: #27B3CF; }
+a:active 			{ outline: none; position: relative; top: 2px; }
+
+.clearfix 			{ clear: both; }
+
+/*------------------------------------*\
+  MAIN
+\*------------------------------------*/
+
+body { 
+    background: #FFFFFF; 
+    color: #222; 
+    font-family: 'Droid Serif', serif; 
+    font-size: 16px; 
+}
+
+#wrapper { 
+    margin: 10px auto; 
+    max-width: 980px; 
+    width: 90%; 
+    background: #FFFFFF; 
+    padding: 10px 0; 
+}
+
+header { 
+    padding: 0px; 
+    background-image: url("images/Shannonbanner3.png")
+}
+
+h1 { 
+    font-size: 60px; 
+    font-family: 'Droid Serif', serif; 
+    line-height: 75px; 
+    padding: 120px 20px 0 3px; 	 
+}
+h1 a:hover 			{ text-decoration: none; color: #27B3CF; }
+
+h2 { 
+    font-family: 'Helvetica'; 
+    font-size: 18px; 
+    padding: 0px; 
+}
+h3 					{ font-family: 'Droid Serif', serif; font-size: 30px; }
+h4 					{ font-family: 'Droid Serif', serif; padding: 3px; margin: 5px 0 0 0; }
+h4 a 				{ text-decoration: none; }
+h4 a:hover 			{  }
+
+nav 				{ background: #222; padding: 0; margin: 10px 0;}
+nav a 				{ color: #F9F9F9; display: block; float: left; padding: 10px; }
+nav a:visited 		{ color: #f9f9f9; }
+nav a:hover			{ text-decoration: none; background: #27B3CF; }
+nav a:active		{ position: relative; top: 0; }
+
+.left-col 			{ width: 60%; float: left; }
+.sidebar 			{ width: 30%; float: right; margin-bottom: 10px; 
+	-webkit-transition-property: width;
+	-moz-transition-property: width;
+	transition-property: width;
+	-webkit-transition-duration: 0.5s, 0.5s;
+	-moz-transition-duration: 0.5s, 0.5s;
+	transition-duration: 0.5s, 0.5s; 
+	-webkit-transition-timing function: linear, ease-in;
+	-moz-transition-timing function: linear, ease-in; 
+	transition-timing function: linear, ease-in;
+}
+
+#featured { padding: 20px; }
+#latest	{ padding: 20px; }
+#about 	{ padding: 20px; }
+
+#program {
+    background-image: url("images/circuit.png");
+    /* top right bottom left */
+    padding:5px 80px; 0px 50px;
+}
+
+.boldtable td {
+font-size: 16pt;
+}
+
+
+p { padding: 0 5px 0 5px; }
+
+ul { list-style: none; }
+ul li { margin: 0 5px; }
+
+footer { padding: 5px; }
+
+pre { overflow: scroll; font-size: 10px; }
