@@ -98,9 +98,11 @@ address {
 #.ptmb7t-x-x-120{font-size:150%; font-weight: bold;}
 
 .ptmb7t-x-x-120{
+    font-size:150%;
+    font-weight: bold;
     font-family: verdana, Helvetica, Geneva, Arial,
           SunSans-Regular, sans-serif;
-    color: gray;
+    color: black;
     background-color: #FFCC66;
     border-right: 15px solid  orange}
 
