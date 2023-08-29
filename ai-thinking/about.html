@@ -19,7 +19,17 @@
   <script>$(function(){$('#header').load('header.html');});</script>
   <script>$(function(){$('#footer').load('footer.html');});</script>
   <script>$(document).ready(function(){$("button").click(function(){$("p").toggle();});});</script>
-  
+  <script type="text/javascript">
+    function hideshow(which){
+    if (!document.getElementById)
+    return
+    if (which.style.display=="block")
+    which.style.display="none"
+    else
+    which.style.display="block"
+    }
+    </script>
+    
 </head>
 
   <body data-bs-spy="scroll" data-bs-target="#navScroll">
@@ -57,21 +67,10 @@ Research: <a href="https://kentridgeai.github.io/" target="blank">https://kentri
 Instagram: <a href="https://www.instagram.com/ai_think.ing/" target="blank">https://www.instagram.com/ai_think.ing/></a><br>
 </p>
 
-
-<a href="javascript:hideshow(document.getElementById('adiv'))">IEEE Membership Information</a>
-<div id="adiv" style="display:block">S'92-M'01-SM'15-F'18</div>
-
-<script type="text/javascript">
-function hideshow(which){
-if (!document.getElementById)
-return
-if (which.style.display=="block")
-which.style.display="none"
-else
-which.style.display="block"
-}
-</script>
-
+<p class=""lead">
+<a href="javascript:hideshow(document.getElementById('adiv'))">2023 Team</a>
+<div id="adiv" style="display:block">Barbara, Dylan, Menghan, Ryan, Juncheng, Yu Xuan, Mehul</div>
+</p>
 
       </div>
     </div>
