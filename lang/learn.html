@@ -1,1 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Learn Chinese Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        #game-container {
+            margin: 50px auto;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .character {
+            font-size: 48px;
+            margin: 20px;
+            color: #2c3e50;
+        }
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px;
+        }
+        button {
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #score {
+            font-size: 24px;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Learn Chinese Vocabulary</h1>
+        <div id="score">Score: 0</div>
+        <div class="character" id="chinese-character"></div>
+        <div class="choices" id="choices"></div>
+        <div id="feedback"></div>
+        <button onclick="nextQuestion()" id="next-btn" style="display: none;">Next Question</button>
+    </div>
 
+    <script>
+        const vocabulary = [
+            { hanzi: '你好', pinyin: 'nǐ hǎo', translation: 'Hello' },
+            { hanzi: '谢谢', pinyin: 'xiè xie', translation: 'Thank you' },
+            { hanzi: '再见', pinyin: 'zài jiàn', translation: 'Goodbye' },
+            { hanzi: '猫', pinyin: 'māo', translation: 'Cat' },
+            { hanzi: '狗', pinyin: 'gǒu', translation: 'Dog' },
+            { hanzi: '爱', pinyin: 'ài', translation: 'Love' },
+            { hanzi: '书', pinyin: 'shū', translation: 'Book' },
+            { hanzi: '学校', pinyin: 'xué xiào', translation: 'School' },
+            { hanzi: '苹果', pinyin: 'píng guǒ', translation: 'Apple' },
+            { hanzi: '水', pinyin: 'shuǐ', translation: 'Water' }
+        ];
+
+        let currentQuestion = null;
+        let score = 0;
+
+        function startGame() {
+            score = 0;
+            document.getElementById('score').textContent = `Score: ${score}`;
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            // Get random question
+            currentQuestion = vocabulary[Math.floor(Math.random() * vocabulary.length)];
+            
+            // Get 3 wrong answers
+            const wrongAnswers = vocabulary
+                .filter(word => word !== currentQuestion)
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3)
+                .map(word => word.translation);
+
+            // Combine answers and shuffle
+            const allAnswers = shuffleArray([currentQuestion.translation, ...wrongAnswers]);
+
+            // Display question
+            document.getElementById('chinese-character').textContent = currentQuestion.hanzi;
+            
+            // Display answer choices
+            const choicesContainer = document.getElementById('choices');
+            choicesContainer.innerHTML = '';
+            allAnswers.forEach(answer => {
+                const button = document.createElement('button');
+                button.textContent = answer;
+                button.onclick = () => checkAnswer(answer);
+                choicesContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedAnswer) {
+            const feedback = document.getElementById('feedback');
+            if (selectedAnswer === currentQuestion.translation) {
+                score += 10;
+                document.getElementById('score').textContent = `Score: ${score}`;
+                feedback.textContent = `Correct! ${currentQuestion.hanzi} (${currentQuestion.pinyin}) means "${currentQuestion.translation}"`;
+                feedback.style.color = 'green';
+            } else {
+                feedback.textContent = `Incorrect. The correct answer was: ${currentQuestion.translation}`;
+                feedback.style.color = 'red';
+            }
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function shuffleArray(array) {
+            return array.sort(() => 0.5 - Math.random());
+        }
+
+        // Start the game when page loads
+        window.onload = startGame;
+    </script>
+</body>
+</html>
