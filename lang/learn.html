@@ -45,6 +45,14 @@
             color: #27ae60;
         }
     </style>
+
+    <script src="jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("data.html"); 
+    });
+    </script> 
+
 </head>
 <body>
     <div id="game-container">
@@ -70,7 +78,7 @@
             { hanzi: '水', pinyin: 'shuǐ', translation: 'Water' }
         ];
 
-        <div w3-include-html="data.html"></div>
+        <div id="includedContent"></div>
 
         let currentQuestion = null;
         let score = 0;
