@@ -46,14 +46,6 @@
         }
     </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-
-    <script> 
-    $(function(){
-      $("#includedContent").load("data.html"); 
-    });
-    </script> 
-
 </head>
 <body>
     <div id="game-container">
@@ -66,21 +58,42 @@
     </div>
 
     <script>
+
         const vocabulary = [
-            { hanzi: '你好', pinyin: 'nǐ hǎo', translation: 'Hello' },
-            { hanzi: '谢谢', pinyin: 'xiè xie', translation: 'Thank you' },
-            { hanzi: '再见', pinyin: 'zài jiàn', translation: 'Goodbye' },
-            { hanzi: '猫', pinyin: 'māo', translation: 'Cat' },
-            { hanzi: '狗', pinyin: 'gǒu', translation: 'Dog' },
-            { hanzi: '爱', pinyin: 'ài', translation: 'Love' },
-            { hanzi: '书', pinyin: 'shū', translation: 'Book' },
-            { hanzi: '学校', pinyin: 'xué xiào', translation: 'School' },
-            { hanzi: '苹果', pinyin: 'píng guǒ', translation: 'Apple' },
-            { hanzi: '水', pinyin: 'shuǐ', translation: 'Water' }
-        ];
-
-        <div id="includedContent"></div>
-
+  { hanzi: '淘气', pinyin: 'táo qì', translation: 'naughty' },
+  { hanzi: '惹', pinyin: 'rě', translation: 'to cause' },
+  { hanzi: '两肋插刀', pinyin: 'liǎng lèi chā dāo', translation: 'willing to sacrifice for their friend' },
+  { hanzi: '赵', pinyin: 'zhào', translation: 'Zhao (surname)' },
+  { hanzi: '科技', pinyin: 'kē jì', translation: 'science and technology' },
+  { hanzi: '来者不拒', pinyin: 'lái zhě bù jù', translation: 'welcoming everyone' },
+  { hanzi: '口头禅', pinyin: 'kǒu tóu chán', translation: 'catchphrase' },
+  { hanzi: '小事一桩', pinyin: 'xiǎo shì yī zhuāng', translation: 'no biggie' },
+  { hanzi: '人缘', pinyin: 'rén yuán', translation: 'popularity' },
+  { hanzi: '红润', pinyin: 'hóng rùn', translation: 'red' },
+  { hanzi: '直率', pinyin: 'zhí shuài', translation: 'straightforward' },
+  { hanzi: '沉默寡言', pinyin: 'chén mò guǎ yán', translation: 'silent' },
+  { hanzi: '争辩', pinyin: 'zhēng biàn', translation: 'argue' },
+  { hanzi: '冤枉', pinyin: 'yuān wǎng', translation: 'wrongly accused' },
+  { hanzi: '推荐', pinyin: 'tuī jiàn', translation: 'recommend' },
+  { hanzi: '葡萄', pinyin: 'pú táo', translation: 'grapes' },
+  { hanzi: '象征', pinyin: 'xiàng zhēng', translation: 'symbolize' },
+  { hanzi: '风俗', pinyin: 'fēng sú', translation: 'traditional customs' },
+  { hanzi: '辞旧迎新', pinyin: 'cí jiù yíng xīn', translation: 'get rid of the old and bring in the new' },
+  { hanzi: '燃放', pinyin: 'rán fàng', translation: 'ignite' },
+  { hanzi: '翩翩起舞', pinyin: 'piān piān qǐ wǔ', translation: 'dance around' },
+  { hanzi: '瓶瓶罐罐', pinyin: 'píng píng guàn guàn', translation: 'bottles and cans' },
+  { hanzi: '厄运', pinyin: 'è yùn', translation: 'bad luck' },
+  { hanzi: '前夕', pinyin: 'qián xī', translation: 'the evening before' },
+  { hanzi: '预示', pinyin: 'yù shì', translation: 'premonition' },
+  { hanzi: '兆头', pinyin: 'zhào tou', translation: 'omen' },
+  { hanzi: '农历', pinyin: 'nóng lì', translation: 'lunar calendar' },
+  { hanzi: '忙碌', pinyin: 'máng lù', translation: 'busy' },
+  { hanzi: '遥远', pinyin: 'yáo yuǎn', translation: 'far' },
+  { hanzi: '恭敬', pinyin: 'gōng jìng', translation: 'respect' },
+  { hanzi: '亲戚', pinyin: 'qīn qī', translation: 'relatives' }, // Corrected pinyin
+  { hanzi: '诸事大吉', pinyin: 'zhū shì dà jí', translation: 'everything to be good' },
+  { hanzi: '元旦', pinyin: 'yuán dàn', translation: 'New Year' } // Corrected translation
+];
         let currentQuestion = null;
         let score = 0;
 
