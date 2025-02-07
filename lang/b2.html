@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chinese Learning App</title>
+<style>
+body { font-family: sans-serif; }
+#test-area { margin-top: 20px; }
+.feedback { margin-top: 10px; font-weight: bold; }
+.correct { color: green; }
+.incorrect { color: red; }
+#options-area { margin-top: 10px;}
+.multiple-choice-option {
+    padding: 5px 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.selected {
+    background-color: lightblue;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Chinese Learning App</h1>
+
+<div id="options-area">
+    <button id="next-question" onclick="startTest()" disabled>Next Question</button>
+    <button id="toggle-mode" onclick="toggleMode()">Toggle Mode: User Entry</button>
+</div>
+
+<div id="test-area">
+  <div id="question"></div>
+  <div id="multiple-choice-options" style="display: none;"></div> <input type="text" id="answer" style="display: block;">
+  <button onclick="checkAnswer()">Submit</button>
+  <div id="feedback" class="feedback"></div>
+</div>
+
+<script>
+let hanziData = {};
+let currentQuestion;
+let testType;
+let isMultipleChoice = false; // Start in user entry mode
+
+// ... (Data loading from hanzi_data.html remains the same)
+// Load data from external HTML (assuming it's a table or similar)
+fetch('b_data.html') // Replace with your HTML file path
+  .then(response => response.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const tableRows = doc.querySelectorAll('table tr'); // Adjust selector as needed
+
+
+    tableRows.forEach(row => {
+      const cells = row.querySelectorAll('td'); // Adjust selector if needed
+      if (cells.length >= 3) { // Ensure enough columns (hanzi, pinyin, english)
+        const hanzi = cells[0].textContent.trim();
+        const pinyin = cells[1].textContent.trim();
+        const english = cells[2].textContent.trim();
+        hanziData[hanzi] = { pinyin: pinyin, english: english };
+      }
+    });
+
+
+    startTest(); // Start the test after data is loaded
+  });
+  
+function startTest() {
+    document.getElementById('next-question').disabled = true; // Disable until answer given
+
+  const hanziList = Object.keys(hanziData);
+  if (hanziList.length === 0) {
+    document.getElementById('question').textContent = "No data loaded yet.";
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * hanziList.length);
+  const hanzi = hanziList[randomIndex];
+
+  const testTypes = ['hanziToEnglish', 'hanziToPinyin', 'pinyinToHanzi'];
+  testType = testTypes[Math.floor(Math.random() * testTypes.length)];
+
+  switch (testType) {
+    case 'hanziToEnglish':
+      currentQuestion = { hanzi: hanzi, answer: hanziData[hanzi].english };
+      document.getElementById('question').textContent = `What is the English meaning of ${hanzi}?`;
+      break;
+    case 'hanziToPinyin':
+      currentQuestion = { hanzi: hanzi, answer: hanziData[hanzi].pinyin };
+      document.getElementById('question').textContent = `What is the pinyin of ${hanzi}?`;
+      break;
+    case 'pinyinToHanzi':
+      currentQuestion = { hanzi: hanzi, answer: hanzi };
+      document.getElementById('question').textContent = `What is the hanzi for ${hanziData[hanzi].pinyin}?`;
+      break;
+  }
+
+  if (isMultipleChoice) {
+      showMultipleChoiceOptions(currentQuestion.answer);
+  }
+
+  document.getElementById('answer').value = '';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('answer').focus();
+}
+
+function showMultipleChoiceOptions(correctAnswer) {
+    const optionsContainer = document.getElementById('multiple-choice-options');
+    optionsContainer.innerHTML = ''; // Clear previous options
+    optionsContainer.style.display = 'block';
+    document.getElementById('answer').style.display = 'none'; // Hide text input
+
+    const allAnswers = [correctAnswer];
+    const hanziList = Object.keys(hanziData);
+    while (allAnswers.length < 4) { // Generate 3 incorrect options
+        const randomIndex = Math.floor(Math.random() * hanziList.length);
+        const randomHanzi = hanziList[randomIndex];
+        const randomAnswer = hanziData[randomHanzi][testType === 'pinyinToHanzi' ? 'pinyin' : testType === 'hanziToPinyin' ? 'pinyin' : 'english'];
+        if (!allAnswers.includes(randomAnswer)) {
+            allAnswers.push(randomAnswer);
+        }
+    }
+
+    shuffleArray(allAnswers); // Shuffle the options
+
+    allAnswers.forEach(option => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'multiple-choice-option';
+        optionDiv.textContent = option;
+        optionDiv.addEventListener('click', () => {
+          document.querySelectorAll('.multiple-choice-option').forEach(el => el.classList.remove('selected')); // Deselect all
+          optionDiv.classList.add('selected');
+          document.getElementById('answer').value = option; // Put selected into the answer box
+          document.getElementById('next-question').disabled = false;
+        });
+        optionsContainer.appendChild(optionDiv);
+    });
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+
+function checkAnswer() {
+  const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+  const correctAnswer = currentQuestion.answer.toLowerCase();
+  const feedbackDiv = document.getElementById('feedback');
+
+  if (userAnswer === correctAnswer) {
+    feedbackDiv.textContent = "Correct!";
+    feedbackDiv.classList.remove('incorrect');
+    feedbackDiv.classList.add('correct');
+    document.getElementById('next-question').disabled = false; // Enable next question button
+    if (!isMultipleChoice) setTimeout(startTest, 1500); // New question after correct answer
+  } else {
+    feedbackDiv.textContent = `Incorrect. The correct answer is ${currentQuestion.answer}.`;
+    feedbackDiv.classList.remove('correct');
+    feedbackDiv.classList.add('incorrect');
+    document.getElementById('next-question').disabled = false; // Enable next question button
+  }
+}
+
+function toggleMode() {
+  isMultipleChoice = !isMultipleChoice;
+  document.getElementById('toggle-mode').textContent = `Toggle Mode: ${isMultipleChoice ? 'Multiple Choice' : 'User Entry'}`;
+  const optionsContainer = document.getElementById('multiple-choice-options');
+  const answerInput = document.getElementById('answer');
+
+  if (isMultipleChoice) {
+      optionsContainer.style.display = 'block';
+      answerInput.style.display = 'none';
+  } else {
+      optionsContainer.style.display = 'none';
+      answerInput.style.display = 'block';
+  }
+  startTest(); // Restart the test to reflect the new mode
+}
+
+
+</script>
+
+</body>
+</html>
