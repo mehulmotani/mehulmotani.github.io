@@ -1,1 +1,106 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chinese Learning App</title>
+<style>
+body { font-family: sans-serif; }
+#test-area { margin-top: 20px; }
+.feedback { margin-top: 10px; font-weight: bold; }
+.correct { color: green; }
+.incorrect { color: red; }
+</style>
+</head>
+<body>
+
+<h1>Chinese Learning App</h1>
+
+<div id="test-area">
+  <div id="question"></div>
+  <input type="text" id="answer">
+  <button onclick="checkAnswer()">Submit</button>
+  <div id="feedback" class="feedback"></div>
+</div>
+
+<script>
+let hanziData = {}; // Store Hanzi data
+let currentQuestion;
+let testType; // hanziToEnglish, hanziToPinyin, pinyinToHanzi
+
+// Load data from external HTML (assuming it's a table or similar)
+fetch('hanzi_data.html') // Replace with your HTML file path
+  .then(response => response.text())
+  .then(html => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const tableRows = doc.querySelectorAll('table tr'); // Adjust selector as needed
+
+    tableRows.forEach(row => {
+      const cells = row.querySelectorAll('td'); // Adjust selector if needed
+      if (cells.length >= 3) { // Ensure enough columns (hanzi, pinyin, english)
+        const hanzi = cells[0].textContent.trim();
+        const pinyin = cells[1].textContent.trim();
+        const english = cells[2].textContent.trim();
+        hanziData[hanzi] = { pinyin: pinyin, english: english };
+      }
+    });
+
+    startTest(); // Start the test after data is loaded
+  });
+
+
+function startTest() {
+  const hanziList = Object.keys(hanziData);
+  if (hanziList.length === 0) {
+    document.getElementById('question').textContent = "No data loaded yet.";
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * hanziList.length);
+  const hanzi = hanziList[randomIndex];
+
+  // Randomly choose the test type
+  const testTypes = ['hanziToEnglish', 'hanziToPinyin', 'pinyinToHanzi'];
+  testType = testTypes[Math.floor(Math.random() * testTypes.length)];
+
+  switch (testType) {
+    case 'hanziToEnglish':
+      currentQuestion = { hanzi: hanzi, answer: hanziData[hanzi].english };
+      document.getElementById('question').textContent = `What is the English meaning of ${hanzi}?`;
+      break;
+    case 'hanziToPinyin':
+      currentQuestion = { hanzi: hanzi, answer: hanziData[hanzi].pinyin };
+      document.getElementById('question').textContent = `What is the pinyin of ${hanzi}?`;
+      break;
+    case 'pinyinToHanzi':
+      currentQuestion = { hanzi: hanzi, answer: hanzi };
+      document.getElementById('question').textContent = `What is the hanzi for ${hanziData[hanzi].pinyin}?`;
+      break;
+  }
+
+  document.getElementById('answer').value = ''; // Clear previous answer
+  document.getElementById('feedback').textContent = ''; // Clear feedback
+  document.getElementById('answer').focus(); // Focus on the input field
+}
+
+function checkAnswer() {
+  const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+  const correctAnswer = currentQuestion.answer.toLowerCase();
+  const feedbackDiv = document.getElementById('feedback');
+
+  if (userAnswer === correctAnswer) {
+    feedbackDiv.textContent = "Correct!";
+    feedbackDiv.classList.remove('incorrect');
+    feedbackDiv.classList.add('correct');
+    setTimeout(startTest, 1500); // New question after correct answer
+  } else {
+    feedbackDiv.textContent = `Incorrect. The correct answer is ${currentQuestion.answer}.`;
+    feedbackDiv.classList.remove('correct');
+    feedbackDiv.classList.add('incorrect');
+  }
+}
+
+</script>
+
+</body>
+</html>
