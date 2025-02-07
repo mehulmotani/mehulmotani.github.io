@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chinese Learning App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .question-container {
+            margin: 20px 0;
+            font-size: 24px;
+            text-align: center;
+        }
+        .answer-container {
+            margin: 20px 0;
+        }
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .choice-button {
+            padding: 15px;
+            font-size: 20px;
+            border: 2px solid #2196F3;
+            border-radius: 8px;
+            background-color: #E3F2FD;
+            color: #1565C0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .choice-button:hover {
+            background-color: #2196F3;
+            color: white;
+            transform: translateY(-2px);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 2px solid #2196F3;
+            border-radius: 4px;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .correct {
+            color: #4CAF50;
+        }
+        .incorrect {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chinese Learning App</h1>
+        
+        <div class="controls">
+            <button id="toggleMode">Mode: Multiple Choice</button>
+            <select id="questionType">
+                <option value="hanziToEnglish">Hanzi → English</option>
+                <option value="hanziToPinyin">Hanzi → Pinyin</option>
+                <option value="pinyinToHanzi">Pinyin → Hanzi</option>
+            </select>
+            <button id="nextQuestion">Next Question</button>
+        </div>
+
+        <div class="question-container">
+            <div id="question"></div>
+        </div>
+
+        <div class="answer-container">
+            <div id="multipleChoice" class="choice-grid"></div>
+            <input type="text" id="userInput" style="display: none" placeholder="Type your answer...">
+            <div id="feedback" class="feedback"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data structure - replace with your external data
+        let languageData = [
+            { hanzi: '你好', pinyin: 'nǐ hǎo', english: 'hello' },
+            { hanzi: '谢谢', pinyin: 'xiè xiè', english: 'thank you' },
+            { hanzi: '再见', pinyin: 'zài jiàn', english: 'goodbye' },
+            { hanzi: '学习', pinyin: 'xué xí', english: 'study' },
+            { hanzi: '中国', pinyin: 'zhōng guó', english: 'China' }
+        ];
+
+        // App state
+        let currentQuestion = null;
+        let isMultipleChoice = true;
+        let currentQuestionType = 'hanziToEnglish';
+
+        // DOM elements
+        const toggleModeBtn = document.getElementById('toggleMode');
+        const questionTypeSelect = document.getElementById('questionType');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const questionDiv = document.getElementById('question');
+        const multipleChoiceDiv = document.getElementById('multipleChoice');
+        const userInputField = document.getElementById('userInput');
+        const feedbackDiv = document.getElementById('feedback');
+
+        // Load external data
+        async function loadLanguageData() {
+            try {
+                const response = await fetch('chinese-data.html');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+                const dataElement = doc.getElementById('languageData');
+                if (dataElement) {
+                    languageData = JSON.parse(dataElement.textContent);
+                }
+            } catch (error) {
+                console.error('Error loading language data:', error);
+            }
+        }
+
+        // Generate random question
+        function generateQuestion() {
+            currentQuestion = languageData[Math.floor(Math.random() * languageData.length)];
+            const questionType = questionTypeSelect.value;
+            
+            switch(questionType) {
+                case 'hanziToEnglish':
+                    questionDiv.textContent = currentQuestion.hanzi;
+                    return currentQuestion.english;
+                case 'hanziToPinyin':
+                    questionDiv.textContent = currentQuestion.hanzi;
+                    return currentQuestion.pinyin;
+                case 'pinyinToHanzi':
+                    questionDiv.textContent = currentQuestion.pinyin;
+                    return currentQuestion.hanzi;
+            }
+        }
+
+        // Generate multiple choice options
+        function generateMultipleChoice(correctAnswer) {
+            const options = new Set([correctAnswer]);
+            while(options.size < 4) {
+                const randomItem = languageData[Math.floor(Math.random() * languageData.length)];
+                const questionType = questionTypeSelect.value;
+                
+                switch(questionType) {
+                    case 'hanziToEnglish':
+                        options.add(randomItem.english);
+                        break;
+                    case 'hanziToPinyin':
+                        options.add(randomItem.pinyin);
+                        break;
+                    case 'pinyinToHanzi':
+                        options.add(randomItem.hanzi);
+                        break;
+                }
+            }
+            return [...options].sort(() => Math.random() - 0.5);
+        }
+
+        // Check answer
+        function checkAnswer(userAnswer, correctAnswer) {
+            const isCorrect = userAnswer.toLowerCase().trim() === correctAnswer.toLowerCase().trim();
+            feedbackDiv.textContent = isCorrect ? 'Correct!' : `Incorrect. The answer is: ${correctAnswer}`;
+            feedbackDiv.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+        }
+
+        // Display question
+        function displayQuestion() {
+            const correctAnswer = generateQuestion();
+            
+            if (isMultipleChoice) {
+                userInputField.style.display = 'none';
+                multipleChoiceDiv.style.display = 'grid';
+                
+                multipleChoiceDiv.innerHTML = '';
+                const options = generateMultipleChoice(correctAnswer);
+                
+                options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'choice-button';
+                    button.textContent = option;
+                    button.onclick = () => checkAnswer(option, correctAnswer);
+                    multipleChoiceDiv.appendChild(button);
+                });
+            } else {
+                userInputField.style.display = 'block';
+                multipleChoiceDiv.style.display = 'none';
+                userInputField.value = '';
+                userInputField.onkeypress = (e) => {
+                    if (e.key === 'Enter') {
+                        checkAnswer(userInputField.value, correctAnswer);
+                    }
+                };
+            }
+            
+            feedbackDiv.textContent = '';
+        }
+
+        // Event listeners
+        toggleModeBtn.onclick = () => {
+            isMultipleChoice = !isMultipleChoice;
+            toggleModeBtn.textContent = `Mode: ${isMultipleChoice ? 'Multiple Choice' : 'User Entry'}`;
+            displayQuestion();
+        };
+
+        questionTypeSelect.onchange = () => {
+            currentQuestionType = questionTypeSelect.value;
+            displayQuestion();
+        };
+
+        nextQuestionBtn.onclick = displayQuestion;
+
+        // Initialize
+        loadLanguageData().then(() => {
+            displayQuestion();
+        });
+    </script>
+</body>
+</html>
