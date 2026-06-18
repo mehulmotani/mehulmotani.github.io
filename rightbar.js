@@ -1,6 +1,6 @@
 //document.write('<center><h4>MyLinks</h4></center>');
-document.write(' <a target="_blank" href="https://www.palpkschools.org/Page/20">Lindbergh</a>');
-document.write(' <a target="_blank" href="https://www.palpkschools.org/Page/24">PPHS</a>');
+document.write(' <a target="_blank" href="https://ls.palpkschools.org/">Lindbergh</a>');
+document.write(' <a target="_blank" href="https://pphs.palpkschools.org/">PPHS</a>');
 document.write(' <a target="_blank" href="https://www.cooper.edu">Cooper Union</a>');
 document.write(' <a target="_blank" href="https://www.syracuse.edu">SyracuseU</a>');
 document.write(' <a target="_blank" href="https://www.cornell.edu">CornellU</a>');
