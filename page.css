@@ -107,3 +107,116 @@ address {
     border-right:230px solid #FFCC66;
     border-left: 15px solid orange}
 
+/* ========================================================
+   RESPONSIVE DESIGN ADDITIONS
+   ======================================================== */
+
+/* Ensure box sizing is predictable across all elements */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Base image safety */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tablet & Mobile Breakpoint (screen width <= 900px) */
+@media screen and (max-width: 900px) {
+    body {
+        margin: 0;
+        padding: 12px;
+        font-size: 95%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #leftbar {
+        order: 1;
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 1em 0;
+        text-align: center;
+    }
+
+    #leftbar img {
+        width: 130px !important;
+        height: auto;
+        border-radius: 50%;
+        margin: 0 auto 12px auto;
+        display: block;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    #leftbar li {
+        display: inline-block;
+        margin: 4px 3px;
+        padding: 0.4em 0.8em;
+        border-radius: 4px;
+        border-right: none;
+        border-left: 4px solid orange;
+        font-size: 0.95em;
+    }
+
+    .content {
+        order: 2;
+        position: static;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Stack 2-column tables vertically on small screens */
+    .content table, 
+    .content tbody, 
+    .content tr {
+        display: block;
+        width: 100% !important;
+    }
+
+    .content td {
+        display: block;
+        width: 100% !important;
+        padding: 6px 0 !important;
+    }
+
+    /* Keep rightbar links as a neat bottom footer block */
+    #rightbar {
+        order: 3;
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        margin: 2.5em 0 1em 0;
+        padding: 14px 10px;
+        border-radius: 6px;
+        line-height: 2;
+        text-align: center;
+    }
+
+    #rightbar a {
+        display: inline-block;
+        margin: 2px 6px;
+        font-size: 0.85em;
+    }
+
+    /* Responsive headers & publication banners */
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h1, h2, h3 {
+        padding: 4px 8px;
+    }
+
+    .ptmb7t-x-x-120 {
+        display: block;
+        border-right: none;
+        font-size: 125%;
+        padding: 4px 8px;
+    }
+}
+
+
