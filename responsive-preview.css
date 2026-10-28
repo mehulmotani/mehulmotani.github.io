@@ -1,0 +1,219 @@
+body {
+margin-top : 0px; 
+margin-right : 10px; 
+margin-bottom : 10px; 
+margin-left : 10px; 
+font-family: verdana, "Times New Roman", Times, serif;
+font-weight : normal; 
+color: black;
+font-size: 90%;
+background-color: white  }
+
+.content {
+position: relative;
+width: auto;
+min-width: 50em;
+max-width: 70em;
+margin: 0em 9em 1em 9em;
+border: 0px solid black;
+padding: 2em 50px 50px 50px;
+z-index: 2;
+}
+
+#leftbar {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    top: 2em;
+    left: 1em;
+    width: 10em }
+#leftbar li {
+    background: #FFCC66;
+    color: blue;
+    margin: 1px 0;
+    padding: 0.3em;
+    border-right: 15px solid  orange}
+#leftbar a {text-decoration: none}
+#leftbar a:link { color: blue; }
+#leftbar a:visited { color: blue; }
+#leftbar a:hover { 
+	font-weight: bold; 
+	color: gray;
+        font-size: 1em}
+
+#rightbar {
+    background-color: #4a4a4a ;
+    position: fixed;
+    padding: 0px;
+    margin: 0;
+    top: 27.0em;
+    /*right: 1em;*/
+    left: 1em;
+    width: 10em;
+    text-align: center;}
+#rightbar a {
+    color: blue;
+    font-family: verdana, arial, helvetica, sans-serif;
+    text-decoration: none;
+    margin: 0px;
+    font-size: 0.7em}
+#rightbar a:link { color: orange }
+#rightbar a:visited { color: #fc6}
+#rightbar a:hover { 
+	font-weight: normal; 
+	color: #ccc;
+        font-size: 0.7em}
+#rightbar h4 { 
+     color: orange;
+     bottom: 0em;}
+
+#rightbarimage {
+width: 10em;
+right: 0em;
+top: 0em;
+position: absolute;
+z-index: 0;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+h1,h2,h3 {
+    font-family: verdana, Helvetica, Geneva, Arial,
+          SunSans-Regular, sans-serif;
+    color: gray;
+    background-color: #FFCC66;
+    border-left: 15px solid  orange}
+
+a {text-decoration: none}
+
+a:link {
+    color: blue }
+a:visited {
+    color: blue}
+
+address {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: thin dotted }
+    
+.ptmb7t-x-x-120{
+    font-size:140%;
+    font-weight: bold;
+    color: gray;
+    background-color: #FFCC66;
+    border-right:230px solid #FFCC66;
+    border-left: 15px solid orange}
+
+
+
+/* ========================================================
+   RESPONSIVE DESIGN ADDITIONS
+   ======================================================== */
+
+/* Ensure box sizing is predictable across all elements */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Base image safety */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* Tablet & Mobile Breakpoint (screen width < 900px) */
+@media screen and (max-width: 900px) {
+    body {
+        margin: 0;
+        padding: 12px;
+        font-size: 95%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #leftbar {
+        order: 1;
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 1em 0;
+        text-align: center;
+    }
+
+    #leftbar img {
+        width: 130px !important;
+        height: auto;
+        border-radius: 50%;
+        margin: 0 auto 12px auto;
+        display: block;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    #leftbar li {
+        display: inline-block;
+        margin: 4px 3px;
+        padding: 0.4em 0.8em;
+        border-radius: 4px;
+        border-right: none;
+        border-left: 4px solid orange;
+        font-size: 0.95em;
+    }
+
+    .content {
+        order: 2;
+        position: static;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Stack 2-column tables vertically on small screens */
+    .content table, 
+    .content tbody, 
+    .content tr {
+        display: block;
+        width: 100% !important;
+    }
+
+    .content td {
+        display: block;
+        width: 100% !important;
+        padding: 6px 0 !important;
+    }
+
+    /* Keep rightbar links as a neat bottom footer block */
+    #rightbar {
+        order: 3;
+        position: static;
+        width: 100%;
+        max-width: 100%;
+        margin: 2.5em 0 1em 0;
+        padding: 14px 10px;
+        border-radius: 6px;
+        line-height: 2;
+        text-align: center;
+    }
+
+    #rightbar a {
+        display: inline-block;
+        margin: 2px 6px;
+        font-size: 0.85em;
+    }
+
+    /* Responsive publication banners */
+    .ptmb7t-x-x-120 {
+        display: block;
+        border-right: none;
+        font-size: 125%;
+        padding: 4px 8px;
+    }
+
+    h1, h2, h3 {
+        padding: 4px 8px;
+    }
+}
